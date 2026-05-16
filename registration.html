@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Fire Fit Fitness</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="widith=device-width, inital-scale=1">
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" href="images/RedOrangeLogo.jpg">
+        <link rel="icon" type="image/png" sizes="64x64" href="images/RedOrangeLogo.jpg">
+
+        <script>
+        function doClear() {
+            var form = document.getElementById('RegistrationForm');
+            if (!form) return;
+
+            form.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="number"], textarea').forEach(function(input) {
+                input.value = "";
+            });
+
+            var select = form.querySelector('select[name="membership"]');
+            if (select) {
+                select.selectedIndex = 0;
+            }
+        }
+
+        function handleFormSubmit(event) {
+            if (validateText() == false) {
+                alert("Required data missing in Step 1: Guest Information");
+                event.preventDefault(); 
+                return false;
+            }
+            
+            if (validateAge() == false) {
+                alert("Required data invalid in Step 1: Age must be between 18 and 100");
+                event.preventDefault();
+                return false;
+            }
+            
+            alert("Your Fire Fit Fitness membership registration has been submitted.");
+            return true;
+        }
+
+        function validateText() {
+            var form = document.getElementById('RegistrationForm');
+            if (!form) return false;
+
+            var guestName = form.elements['guest-name'].value.trim();
+            var email = form.elements['email'].value.trim();
+            var phone = form.elements['phone'].value.trim();
+
+            if (guestName.length == 0 || email.length == 0 || phone.length == 0) {
+                return false;
+            }
+            return true;
+        }
+
+        function validateAge() {
+            var form = document.getElementById('RegistrationForm');
+            if (!form) return false;
+
+            var ageVal = parseInt(form.elements['age'].value, 10);
+            if (isNaN(ageVal) || ageVal < 18 || ageVal > 100) {
+                return false;
+            }
+            return true;
+        }
+        </script>
+</head>
+
+<body>
+    <div class="container">
+            <nav class="navbar">
+                <img class="logo" src="images/RedOrangeLogo.jpg" alt="Fire Fitness">
+                <div class="nav">
+                    <a href="index.html">About</a>
+                    <a href="registration.html">Membership</a>
+                    <a href="interactive.html">Features</a>
+            </nav>
+        </div>
+
+        <div class="page-title">
+            <div class="title">Membership Registration</div>
+            <div class="subtitle">Join Fire Fit Fitness today and start your fitness journey</div>
+        </div>
+
+        <div class="form-container">
+            <form class="form-grid">
+                <fieldset>
+                    <legend>Guest Information</legend>
+
+                    <label for="guest-name">Full Name:</label>
+                    <input type="text" name="guest-name" id="guest-name" required>
+
+                    <label for="email">Email Address:</label>
+                    <input type="email" name="email" id="email" required>
+
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" required>
+
+                    <label for="guests">Age:</label>
+                    <input type="number" id="age" name="age" min="18" max="100" required>
+
+                    <label for="membership">Membership:</label>
+                    <select name="membership" id="membership">
+                        <option value="Basic">Basic</option>
+                        <option value="Standard">Standard</option>
+                        <option value="Premium">Premium</option>
+                    </select>
+
+                    <label for="fitnessgoals">Fitness Goals:</label>
+                    <textarea id="fitnessgoals" name="fitnessgoals" rows="4"></textarea>
+                </fieldset>
+
+                <div class="form-actions" style="margin-top: 15px;">
+                <button type="submit">Submit Registration</button>
+                <button type="button" onClick="doClear()">Clear Entries</button>
+            </form>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-grid">
+                <div class="footer-box">Fire Fit Fitness</div>
+                <div class="footer-box">Contact</div>
+                <div class="footer-box">Hours</div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

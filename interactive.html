@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Fire Fit Fitness</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="images/RedOrangeLogo.jpg">
+    <link rel="icon" type="image/png" sizes="64x64" href="images/RedOrangeLogo.jpg">
+</head>
+
+<body>
+<div class="container">
+    <nav class="navbar">
+        <img class="logo" src="images/RedOrangeLogo.jpg" alt="Fire Fitness">
+        <div class="nav">
+            <a href="index.html">About</a>
+            <a href="registration.html">Membership</a>
+            <a href="interactive.html">Features</a>
+        </div>
+    </nav>
+</div>
+
+<div class="page-title">
+    <div class="title">Before & After</div>
+</div>
+
+<section class="feature-section">
+    <div class="feature-title">Transformation Gallery</div>
+    <div class="before-after-container">
+        <img class="img-before" src="images/before.jpg" alt="before">
+        <img class="img-after" src="images/after.jpg" alt="after">
+        <input type="range" min="0" max="100" value="50" class="slider-input" id="before-after-slider">
+    </div>
+</section>
+
+<section class="feature-section">
+    <div class="feature-title">Meal of the Day</div>
+    <div class="workout-display">
+        <div id="meal-output" class="workout-title">Click the button to generate today's meal</div>
+    </div>
+    <div id="generate-btn" class="generate-button">Generate New Meal</div>
+</section>
+
+<script>
+(function() {
+    const slider = document.getElementById("before-after-slider");
+    const afterImg = document.querySelector(".img-after");
+    
+    if (slider && afterImg) {
+        slider.addEventListener("input", (e) => {
+            const value = e.target.value;
+            afterImg.style.clipPath = `polygon(0 0, ${value}% 0, ${value}% 100%, 0 100%)`;
+        });
+    }
+})();
+</script>
+
+<script>
+(function() {
+  const meals = [
+    { name: "Avocado Toast with Poached Egg", type: "Breakfast", prep: "10 mins" },
+    { name: "Berry Protein Smoothie Bowl", type: "Breakfast", prep: "5 mins" },
+    { name: "Grilled Chicken Caesar Salad", type: "Lunch", prep: "15 mins" },
+    { name: "Quinoa Chickpea Mediterranean Bowl", type: "Lunch", prep: "10 mins" },
+    { name: "Pan-Seared Salmon with Asparagus", type: "Dinner", prep: "20 mins" },
+    { name: "Garlic Butter Shrimp Pasta", type: "Dinner", prep: "15 mins" },
+    { name: "Sweet Potato & Black Bean Chili", type: "Dinner", prep: "30 mins" }
+  ];
+
+  const button = document.getElementById("generate-btn");
+  const display = document.getElementById("meal-output");
+
+  if (!button || !display) return;
+
+  button.addEventListener("click", () => {
+    const randomIndex = Math.floor(Math.random() * meals.length);
+    const meal = meals[randomIndex];
+    
+    display.innerHTML = `
+      <span class="meal-name">${meal.name}</span>
+      <span class="meal-meta">(${meal.type} • ${meal.prep})</span>
+    `;
+  });
+})();
+</script>
+
+<footer class="footer">
+    <div class="footer-grid">
+        <div class="footer-box">Fire Fit Fitness</div>
+        <div class="footer-box">Contact</div>
+        <div class="footer-box">Hours</div>
+    </div>
+</footer>
+</div>
+</body>
+</html>
